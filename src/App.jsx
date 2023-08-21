@@ -1,8 +1,8 @@
-import SearchBar from './Components/SearchBar/SearchBar';
+import activeDecklist from "./pages/activeDecklist/activeDecklist";
 
 function App() {
   return (
-    <SearchBar/>
+    <activeDecklist/>
   );
 }
 
