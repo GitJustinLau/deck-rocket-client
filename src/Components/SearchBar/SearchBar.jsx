@@ -9,7 +9,6 @@ const SearchBar = (addCard) => {
     const [inputList, setInputList] = useState(null);
     const [active, setActive] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
-    const [isHovered, setIsHovered] = useState(false)
 
     let delay;
     const handleInputChange = (e) => {
@@ -22,7 +21,7 @@ const SearchBar = (addCard) => {
         if (searchInput) {
             delay = setTimeout(() => {
                 axios
-                    .get(process.env.REACT_APP_CARDSEARCH_URL + e.target.value)
+                    .get(`${process.env.REACT_APP_CARDSEARCH_URL}/cardSearch?name=${e.target.value}`)
                     .then((res) => {
                         console.log('api', res.data);
                         const searchResults = res.data.slice(0, 15)
@@ -39,24 +38,13 @@ const SearchBar = (addCard) => {
         addCard(e.target.value);
     }
 
-    const optionClassname = isHovered ? "search-bar__option--hovered" : "search-bar__option";
-
-    const handleMouseEnter = () => {
-        setIsHovered(true)
-    }
-
-    const handleMouseLeave = () => {
-        setIsHovered(false)
-    }
-
     return (
         <>
             <input type="search" placeholder="Search here" onChange={handleInputChange} value={searchInput}
                 className='search-bar' onFocus={handleFocus} onBlur={handleFocus} />
             {active && searchInput && isLoading && <LoadingIcon />}
             {active && searchInput && inputList && inputList.map((cardName, index) => {
-                return <div className={optionClassname} key={"searchResult-" + index} onClick={handleClick}
-                    onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}> {cardName} </div>
+                return <div className='search-bar__option' key={index} onClick={handleClick}>{cardName}</div>
             })}
         </>
     )

@@ -1,8 +1,8 @@
-import activeDecklist from "./pages/activeDecklist/activeDecklist";
+import ActiveDecklist from "./pages/ActiveDecklist/ActiveDecklist";
 
 function App() {
   return (
-    <activeDecklist/>
+    <ActiveDecklist/>
   );
 }
 
