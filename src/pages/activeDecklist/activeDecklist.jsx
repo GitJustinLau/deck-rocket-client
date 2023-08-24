@@ -4,8 +4,8 @@ import SearchBar from "../../Components/SearchBar/SearchBar";
 const activeDecklist = () => {
 
     const addCard = (cardName) => {
-        axios
-            .get(process.env.REACT_APP_)
+        // axios
+        //     .get(process.env.REACT_APP_)
     }
 
     return (
