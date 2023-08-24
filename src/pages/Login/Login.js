@@ -1,5 +1,5 @@
 import './Login.scss';
-import Input from "../../components/Input/Input";
+import Input from "../../Components/Input/Input";
 import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
@@ -11,7 +11,7 @@ function Login() {
     const handleSubmit = (event) => {
         event.preventDefault();
         
-        axios.post("http://localhost:8080/api/users/login", {
+        axios.post("http://localhost:8080/users/login", {
             email: event.target.email.value,
             password: event.target.password.value
         })

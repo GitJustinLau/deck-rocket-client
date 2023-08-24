@@ -21,7 +21,7 @@ const SearchBar = (addCard) => {
         if (searchInput) {
             delay = setTimeout(() => {
                 axios
-                    .get(`${process.env.REACT_APP_CARDSEARCH_URL}/cardSearch?name=${e.target.value}`)
+                    .get(`${process.env.REACT_APP_URL}/cardSearch?name=${e.target.value}`)
                     .then((res) => {
                         console.log('api', res.data);
                         const searchResults = res.data.slice(0, 15)

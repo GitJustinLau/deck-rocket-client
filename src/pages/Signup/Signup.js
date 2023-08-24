@@ -2,7 +2,7 @@ import "./Signup.scss";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import Input from "../../components/Input/Input";
+import Input from "../../Components/Input/Input";
 
 function Signup () {
     const [error, setError] = useState("");
@@ -12,13 +12,10 @@ function Signup () {
         event.preventDefault();
 
         axios
-            .post("http://localhost:8080/api/users/register", {
+            .post("http://localhost:8080/users/register", {
                 email: event.target.email.value,
                 password: event.target.password.value,
-                first_name: event.target.first_name.value,
-                last_name: event.target.last_name.value,
-                phone: event.target.phone.value,
-                address: event.target.address.value,
+                username: event.target.username.value,
             })
             .then(() => {
                 setSuccess(true);
@@ -36,12 +33,9 @@ function Signup () {
             <form className="signup" onSubmit={handleSubmit}>
                 <h1 className="signup__title">Sign up</h1>
 
-                <Input type="text" name="first_name" label="First name" />
-                <Input type="text" name="last_name" label="Last name" />
-                <Input type="text" name="phone" label="Phone" />
-                <Input type="text" name="address" label="Address" />
-                <Input type="text" name="email" label="Email" />
+                <Input type="text" name="username" label="Username" />
                 <Input type="password" name="password" label="Password" />
+                <Input type="text" name="email" label="Email" />
 
                 <button className="signup__button">Sign up</button>
 
