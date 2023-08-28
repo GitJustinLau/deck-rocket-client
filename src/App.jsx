@@ -11,7 +11,7 @@ function App() {
         <Route path="/" element={<Dashboard />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/decklist/:id" element={<ActiveDecklist />} />
+        <Route path="/decklists/:decklistId" element={<ActiveDecklist />} />
       </Routes>
     </BrowserRouter>
   );

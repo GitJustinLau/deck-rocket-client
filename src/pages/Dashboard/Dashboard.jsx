@@ -2,11 +2,14 @@ import "./Dashboard.scss";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import deleteIcon from '../../assets/icons/delete.svg';
 
 function Dashboard() {
   const [user, setUser] = useState(null);
   const [failedAuth, setFailedAuth] = useState(false);
   const [userDecklists, setUserDecklists] = useState([])
+  const [errMsg, setErrMsg] = useState('')
+  const [postErr, setPostErr] = useState(false)
 
   useEffect(() => {
     const token = sessionStorage.getItem("token");
@@ -23,7 +26,7 @@ function Dashboard() {
         },
       })
       .then((res) => {
-        setUser(res.data);
+        setUser(res.data.id);
         return axios.get(`${process.env.REACT_APP_URL}/decklists/${res.data.id}`)
       })
       .then((res) => {
@@ -34,6 +37,44 @@ function Dashboard() {
         setFailedAuth(true);
       });
   }, []);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const deckName = e.target.name.value;
+    e.target.name.value = "";
+    axios
+      .post(`${process.env.REACT_APP_URL}/decklists/${user}`, {
+        "name": deckName
+      })
+      .then((res) => {
+        return axios.get(`${process.env.REACT_APP_URL}/decklists/${user}`)
+      })
+      .then((res) => {
+        setUserDecklists(res.data)
+      })
+      .catch((err) => {
+        console.log("post error:", err)
+        setPostErr(true)
+        setErrMsg(err.response.data.message)
+        setTimeout(() => {
+          setPostErr(false)
+        }, 3000);
+      })
+  }
+
+  const handleDel = (deckId) => {
+    axios
+      .delete(`${process.env.REACT_APP_URL}/decklists/${deckId}`)
+      .then((res) => {
+        return axios.get(`${process.env.REACT_APP_URL}/decklists/${user}`)
+      })
+      .then((res) => {
+        setUserDecklists(res.data)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
 
   const handleLogout = () => {
     sessionStorage.removeItem("token");
@@ -62,21 +103,22 @@ function Dashboard() {
 
   return (
     <main className="dashboard">
-      <h1 className="dashboard__title">Dashboard</h1>
-
-      <p>
-        Welcome back, {user.username}
-      </p>
-
+      <p>{user.username}</p>
+      <button className="dashboard__logout" onClick={handleLogout}>Log out</button>
       <h2>My Decklists</h2>
-      {userDecklists.map((decklist) => {
-        return <article>
-          {decklist.name}
+      <form onSubmit={handleSubmit}>
+        <input type="text" name="name" placeholder="New Decklist here..." />
+        <button>icon</button>
+      </form>
+      {postErr && errMsg}
+      {userDecklists.map((decklist, index) => {
+        return <article key={index}>
+          <Link to={`/decklists/${decklist.id}`}>
+            <p>{decklist.name}</p>
+          </Link>
+          <img src={deleteIcon} alt="trash can" onClick={() => handleDel(decklist.id)} />
         </article>
       })}
-      <button className="dashboard__logout" onClick={handleLogout}>
-        Log out
-      </button>
     </main>
   );
 }
