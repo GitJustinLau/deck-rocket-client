@@ -27,7 +27,7 @@ function Dashboard() {
       })
       .then((res) => {
         setUser(res.data.id);
-        return axios.get(`${process.env.REACT_APP_URL}/decklists/${res.data.id}`)
+        return axios.get(`${process.env.REACT_APP_URL}/decklists/user/${res.data.id}`)
       })
       .then((res) => {
         setUserDecklists(res.data)
@@ -43,11 +43,11 @@ function Dashboard() {
     const deckName = e.target.name.value;
     e.target.name.value = "";
     axios
-      .post(`${process.env.REACT_APP_URL}/decklists/${user}`, {
+      .post(`${process.env.REACT_APP_URL}/decklists/user/${user}`, {
         "name": deckName
       })
       .then((res) => {
-        return axios.get(`${process.env.REACT_APP_URL}/decklists/${user}`)
+        return axios.get(`${process.env.REACT_APP_URL}/decklists/user/${user}`)
       })
       .then((res) => {
         setUserDecklists(res.data)
@@ -62,11 +62,11 @@ function Dashboard() {
       })
   }
 
-  const handleDel = (deckId) => {
+  const handleDel = (decklistId) => {
     axios
-      .delete(`${process.env.REACT_APP_URL}/decklists/${deckId}`)
+      .delete(`${process.env.REACT_APP_URL}/decklists/${decklistId}`)
       .then((res) => {
-        return axios.get(`${process.env.REACT_APP_URL}/decklists/${user}`)
+        return axios.get(`${process.env.REACT_APP_URL}/decklists/user/${user}`)
       })
       .then((res) => {
         setUserDecklists(res.data)
