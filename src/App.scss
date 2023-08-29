@@ -1,0 +1,15 @@
+@use "./styles/partials/fonts";
+@use "./styles/partials/text";
+@use "./styles/partials/mixins" as *;
+@use "./styles/partials/variables" as *;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  font-family: TitilliumWeb;
+}
+
+a {
+    text-decoration: none;
+}

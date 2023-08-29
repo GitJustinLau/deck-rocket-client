@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import axios from 'axios';
+import './SearchBar.scss';
 
 import LoadingIcon from '../LoadingIcon/LoadingIcon';
 
@@ -42,14 +43,14 @@ const SearchBar = ({ addCard }) => {
     }
     
     return (
-        <>
+        <article className='search'>
             <input type="search" placeholder="Search here" onChange={handleInputChange} value={searchInput}
-                className='search-bar' onFocus={handleFocus} onBlur={handleFocus} />
+                className='search__bar' onFocus={handleFocus} onBlur={handleFocus} />
             {active && searchInput && isLoading && <LoadingIcon />}
             {searchInput && inputList && inputList.map((cardName, index) => {
-                return <div className='search-bar__option' key={index} onClick={() => {handleClick(cardName)  }}>{cardName}</div>
+                return <div className='search__option' key={index} onClick={() => {handleClick(cardName)  }}>{cardName}</div>
             })}
-        </>
+        </article>
     )
 }
 

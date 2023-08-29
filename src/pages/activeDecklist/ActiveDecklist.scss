@@ -1,0 +1,18 @@
+
+.active {
+    display: flex;
+
+    &__card {
+        width: 50%;
+    }
+
+    &__visual {
+        height: 50%;
+    }
+
+    &__details {
+        height: 50%;
+    }
+
+    &__cards {}
+}

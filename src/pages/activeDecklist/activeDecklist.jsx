@@ -2,6 +2,7 @@ import axios from "axios";
 import SearchBar from "../../Components/SearchBar/SearchBar";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import './ActiveDecklist.scss';
 
 const ActiveDecklist = () => {
     const { decklistId } = useParams();
@@ -34,8 +35,16 @@ const ActiveDecklist = () => {
 
     return (
         <main className="active">
-            <SearchBar addCard={addCard} />
-            <section>
+            <section className="active__card">
+                <div className="active__visual">
+
+                </div>
+                <div className="active__details">
+
+                </div>
+            </section>
+            <SearchBar addCard={addCard} className="active__search"/>
+            <section className="active__decklist">
                 {cards.map((card, index) => {
                     return <article key={index}>
                         <p>{card.name}</p>

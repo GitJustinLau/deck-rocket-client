@@ -1,0 +1,38 @@
+/* Media Size */
+$tablet-screen-size: 768px;
+$desktop-screen-size: 1280px;
+
+
+/* Padding & Margin Settings */
+
+$margin-mb: 1rem;
+$margin-tb: 2rem;
+
+$gutter-mb: 1rem;
+$gutter-tb: 1.5rem;
+
+/* Colors */
+
+// Primary
+$instock-black: #13182C;
+$instock-indigo: #2E66E5;
+$white: #FFFFFF;
+
+// Secondary
+$slate: #5C667E;
+$cloud: #BDC5D5;
+
+// Background 
+$graphite: #232940;
+$light-grey: #F7F8F9;
+
+$light-grey-70: rgba(247, 248, 249, 0.7);
+
+// Supporting
+$green: #158463;
+$red: #C94515;
+
+
+/* Others */
+$divider: 1px solid $cloud;
+$box-shadow: 0px 2px 5px rgba(19, 24, 44, 0.1);
