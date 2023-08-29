@@ -23,7 +23,7 @@ const SearchBar = ({ addCard }) => {
             delay = setTimeout(async () => {
                 try {
                     const search = await axios.get(`${process.env.REACT_APP_URL}/cardSearch?name=${e.target.value}`)
-                    const searchResults = search.data.slice(0, 15)
+                    const searchResults = search.data.slice(0, 8)
                     setInputList(searchResults);
                     setIsLoading(false);
                 } catch (error) {
@@ -41,15 +41,18 @@ const SearchBar = ({ addCard }) => {
         setSearchInput("");
         addCard(cardName)
     }
-    
+
     return (
         <article className='search'>
             <input type="search" placeholder="Search here" onChange={handleInputChange} value={searchInput}
                 className='search__bar' onFocus={handleFocus} onBlur={handleFocus} />
             {active && searchInput && isLoading && <LoadingIcon />}
-            {searchInput && inputList && inputList.map((cardName, index) => {
-                return <div className='search__option' key={index} onClick={() => {handleClick(cardName)  }}>{cardName}</div>
-            })}
+            <div className="search__results">
+                {searchInput && inputList && inputList.map((cardName, index) => {
+                    return <div className='search__option' key={index} onClick={() => { handleClick(cardName) }}>{cardName}</div>
+                })}
+            </div>
+
         </article>
     )
 }

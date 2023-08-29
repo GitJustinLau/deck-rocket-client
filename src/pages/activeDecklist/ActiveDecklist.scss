@@ -1,9 +1,21 @@
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
 
 .active {
     display: flex;
+    background-color: $background;
+    height: 100vh;
+    padding: 1rem;
 
-    &__card {
+    &__selected {
         width: 50%;
+        position: relative;
+    }
+
+    &__card-img {
+        border-radius: 10px;
+        width: 265px;
+        height: 370px;
     }
 
     &__visual {
@@ -15,4 +27,15 @@
     }
 
     &__cards {}
+
+    &__bar {}
+
+    &__name {
+        padding: 0 0.5rem;
+
+        &--selected {
+            @extend .active__name;
+            background-color: $dark;
+        }
+    }
 }

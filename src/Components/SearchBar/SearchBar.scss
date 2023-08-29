@@ -1,4 +1,19 @@
-.search {
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
 
-    &__bar {}
+.search {
+    position: relative;
+
+    &__bar {
+        outline: none;
+    }
+
+    &__results {
+        position: absolute;
+    }
+
+    &__option {
+        color: $primary-text;
+        background-color: $dark;
+    }
 }

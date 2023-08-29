@@ -9,14 +9,14 @@ label,
 a,
 button,
 p {
-    color: $instock-black;
+    color: $primary-text;
     margin: 0;
 }
 
 h1 {
     font-size: 1.75rem; // 28px
     line-height: 2.25rem; // 36px
-    color: $instock-black;
+    color: $primary-text;
     font-weight: 600;
 
     @include tablet {
@@ -28,7 +28,7 @@ h1 {
 h2 {
     font-size: 1.25rem; // 20px
     line-height: 1.75rem; // 28px
-    color: $instock-black;
+    color: $primary-text;
     font-weight: 600;
 
     @include tablet {
@@ -43,7 +43,7 @@ a,
 button {
     font-size: 0.8125rem; // 13px
     line-height: 1.25rem; // 20px
-    color: $instock-black;
+    color: $primary-text;
     font-weight: 600;
 
     @include tablet {
@@ -55,7 +55,7 @@ button {
 h4 {
     font-size: 0.6875rem; // 11px
     line-height: 1rem; // 16px
-    color: $slate;
+    color: $secondary-text;
     text-transform: uppercase;
 
     @include tablet {

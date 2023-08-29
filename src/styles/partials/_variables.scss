@@ -2,37 +2,31 @@
 $tablet-screen-size: 768px;
 $desktop-screen-size: 1280px;
 
-
 /* Padding & Margin Settings */
-
 $margin-mb: 1rem;
 $margin-tb: 2rem;
 
 $gutter-mb: 1rem;
 $gutter-tb: 1.5rem;
 
-/* Colors */
+/* Colors */ 
 
 // Primary
-$instock-black: #13182C;
-$instock-indigo: #2E66E5;
-$white: #FFFFFF;
+$dark: #121112;
+$primary-text: #e7e6e7;
+$accent: #ad4c1c;
 
 // Secondary
-$slate: #5C667E;
-$cloud: #BDC5D5;
+$secondary-text: #9c9a9b;
 
 // Background 
-$graphite: #232940;
-$light-grey: #F7F8F9;
-
-$light-grey-70: rgba(247, 248, 249, 0.7);
+$background: #252128;
 
 // Supporting
-$green: #158463;
-$red: #C94515;
-
+$valid: #158463;
+$error: #C94515;
+$primary-text-70: rgba(247, 248, 249, 0.7);
 
 /* Others */
-$divider: 1px solid $cloud;
-$box-shadow: 0px 2px 5px rgba(19, 24, 44, 0.1);
+$divider: 1px solid $secondary-text;
+$box-shadow: 0px 2px 5px rgba(28, 36, 39, 0.1);

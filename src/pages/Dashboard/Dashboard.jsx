@@ -38,42 +38,33 @@ function Dashboard() {
       });
   }, []);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const deckName = e.target.name.value;
-    e.target.name.value = "";
-    axios
-      .post(`${process.env.REACT_APP_URL}/decklists/user/${user}`, {
-        "name": deckName
-      })
-      .then((res) => {
-        return axios.get(`${process.env.REACT_APP_URL}/decklists/user/${user}`)
-      })
-      .then((res) => {
-        setUserDecklists(res.data)
-      })
-      .catch((err) => {
-        console.log("post error:", err)
-        setPostErr(true)
-        setErrMsg(err.response.data.message)
-        setTimeout(() => {
-          setPostErr(false)
-        }, 3000);
-      })
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      const deckName = e.target.name.value;
+      e.target.name.value = "";
+      await axios.post(`${process.env.REACT_APP_URL}/decklists/user/${user}`, { "name": deckName })
+      const userDecklists = await axios.get(`${process.env.REACT_APP_URL}/decklists/user/${user}`)
+      setUserDecklists(userDecklists.data)
+    } catch (err) {
+      console.log("post error:", err)
+      setPostErr(true)
+      setErrMsg(err.response.data.message)
+      setTimeout(() => {
+        setPostErr(false)
+      }, 3000);
+    }
   }
 
-  const handleDel = (decklistId) => {
-    axios
-      .delete(`${process.env.REACT_APP_URL}/decklists/${decklistId}`)
-      .then((res) => {
-        return axios.get(`${process.env.REACT_APP_URL}/decklists/user/${user}`)
-      })
-      .then((res) => {
-        setUserDecklists(res.data)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+  const handleDel = async (decklistId) => {
+    try {
+      await axios.delete(`${process.env.REACT_APP_URL}/decklists/${decklistId}`)
+      const userDecklists = await axios.get(`${process.env.REACT_APP_URL}/decklists/user/${user}`)
+      setUserDecklists(userDecklists.data)
+    }
+    catch (err) {
+      console.log(err)
+    }
   }
 
   const handleLogout = () => {
@@ -86,11 +77,9 @@ function Dashboard() {
     return (
       <main className="dashboard">
         <p>You must be logged in to see this page.</p>
-        <p>
-          <Link to="/login">Log in</Link>
-        </p>
+        <p><Link to="/login">Log in</Link></p>
       </main>
-    );
+    )
   }
 
   if (user === null) {
@@ -98,7 +87,7 @@ function Dashboard() {
       <main className="dashboard">
         <p>Loading...</p>
       </main>
-    );
+    )
   }
 
   return (
