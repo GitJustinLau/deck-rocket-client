@@ -34,25 +34,37 @@ const SearchBar = ({ addCard }) => {
         }
     };
 
-    const handleFocus = () => setActive(!active);
+    const handleFocus = () => {
+        setTimeout(() => {
+            setActive(true);
+        }, 250);
+    }
+
+    const handleBlur = () => {
+        setTimeout(() => {
+            setActive(false);
+        }, 250);
+    }
 
 
     const handleClick = (cardName) => {
         setSearchInput("");
         addCard(cardName)
+
     }
 
     return (
         <article className='search'>
-            <input type="search" placeholder="Search here" onChange={handleInputChange} value={searchInput}
-                className='search__bar' onFocus={handleFocus} onBlur={handleFocus} />
-            {active && searchInput && isLoading && <LoadingIcon />}
-            <div className="search__results">
-                {searchInput && inputList && inputList.map((cardName, index) => {
+            <input type="search" placeholder="Search here" onFocus={handleFocus} onBlur={handleBlur} onChange={handleInputChange} value={searchInput}
+                className='search__bar' />
+            {active && searchInput && isLoading && <div className="search__loading">
+                <LoadingIcon />
+            </div>}
+            <div className="search__results" >
+                {active && !isLoading && searchInput && inputList.map((cardName, index) => {
                     return <div className='search__option' key={index} onClick={() => { handleClick(cardName) }}>{cardName}</div>
                 })}
             </div>
-
         </article>
     )
 }

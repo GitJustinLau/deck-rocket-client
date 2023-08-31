@@ -2,18 +2,36 @@
 @use "../../styles/partials/variables" as *;
 
 .search {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
     position: relative;
-    margin: .25rem;
+    margin: .5rem;
+    width: 60%;
 
     &__bar {
-        width: 45%;
+        width: 80%;
         outline: none;
+        background-color: $dark;
+        color: $primary-text;
+        padding: 0.25rem .5rem;
+        border: none;
+
+        &::placeholder {
+            color: $primary-text;
+        }
     }
 
     &__results {
+        top: 2rem;
         position: absolute;
         white-space: nowrap;
         background-color: $dark;
+        
+    }
+
+    &__loading {
+        padding: 0 .5rem;
     }
 
     &__option {

@@ -5,6 +5,8 @@
     background-color: $background;
     padding: 1rem;
     min-height: 100vh;
+    position: relative;
+    top: 4rem;
 
     &__title {
         margin: 0 0 1rem;
