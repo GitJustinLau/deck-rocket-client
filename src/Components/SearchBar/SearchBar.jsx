@@ -30,7 +30,7 @@ const SearchBar = ({ addCard }) => {
                     console.error('Error fetching search results:', error);
                     setIsLoading(false);
                 }
-            }, 500);
+            }, 1000);
         }
     };
 

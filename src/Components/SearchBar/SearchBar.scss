@@ -3,18 +3,21 @@
 
 .search {
     position: relative;
+    margin: .25rem;
 
     &__bar {
+        width: 45%;
         outline: none;
     }
 
     &__results {
         position: absolute;
         white-space: nowrap;
+        background-color: $dark;
     }
 
     &__option {
         color: $primary-text;
-        background-color: $dark;
+        margin: .25rem;
     }
 }

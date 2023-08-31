@@ -2,34 +2,59 @@
 @use "../../styles/partials/variables" as *;
 
 .active {
+    position: relative;
+    top: 4rem;
+
     display: flex;
+    gap: 1rem;
     background-color: $background;
     height: 100vh;
     padding: 1rem;
 
+
+
     &__selected {
         width: 50%;
+        height: 100%;
         position: relative;
-    }
-
-    &__card-img {
-        border-radius: 10px;
-        width: 265px;
-        height: 370px;
+        border: 1px red solid;
     }
 
     &__visual {
         height: 50%;
     }
 
+    &__card-img {
+        border-radius: 10px;
+        width: 40%;
+    }
+
     &__details {
         height: 50%;
     }
 
-    &__bar {}
+
+    &__right {
+        width: 50%;
+        height: 100%;
+        align-self: flex-end;
+    }
+
+    &__decklist {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    &__type {
+        padding: .25rem;
+        width: calc(100% / 3);
+    }
 
     &__name {
-        padding: 0 0.5rem;
+        margin: 0.25rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
 
         &--selected {
             @extend .active__name;

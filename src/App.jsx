@@ -5,11 +5,12 @@ import Dashboard from "./pages/Dashboard/Dashboard";
 import Login from "./pages/Login/Login";
 import Signup from "./pages/Signup/Signup";
 import ActiveDecklist from "./pages/ActiveDecklist/ActiveDecklist";
+import Header from "./Components/Header/Header";
 
 function App() {
   return (
     <BrowserRouter>
-    
+      <Header />
       <Routes>
         <Route path="/" element={<Dashboard />} />
         <Route path="/login" element={<Login />} />

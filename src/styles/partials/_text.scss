@@ -1,18 +1,6 @@
 @use './_mixins' as *;
 @use './_variables' as *;
 
-h1,
-h2,
-h3,
-h4,
-label,
-a,
-button,
-p {
-    color: $primary-text;
-    margin: 0;
-}
-
 h1 {
     font-size: 1.75rem; // 28px
     line-height: 2.25rem; // 36px
@@ -43,7 +31,7 @@ a,
 button {
     font-size: 0.8125rem; // 13px
     line-height: 1.25rem; // 20px
-    color: $primary-text;
+    color: $secondary-text;
     font-weight: 600;
 
     @include tablet {
@@ -67,6 +55,7 @@ h4 {
 p {
     font-size: 0.8125rem; // 13px
     line-height: 1.25rem; // 20px
+    color: $primary-text;
 
     @include tablet {
         font-size: 0.875rem; // 14px
