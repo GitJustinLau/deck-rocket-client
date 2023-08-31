@@ -11,6 +11,8 @@ const ActiveDecklist = () => {
     const [cards, setCards] = useState([])
     const [selected, setSelected] = useState({})
     const [selectedImg, setSelectedImg] = useState(cardBack)
+    const [selectedDetails, setSelectedDetails] = useState({})
+    const [hovered, setHovered] = useState({})
 
     const fetchData = async () => {
         try {
@@ -35,9 +37,10 @@ const ActiveDecklist = () => {
         }
     }
 
-    const handleSelect = (type, index, url) => {
+    const handleSelect = (type, index, card) => {
         setSelected({ type, index })
-        setSelectedImg(url || cardBack)
+        setSelectedImg(card.imageUrl || cardBack)
+        setSelectedDetails(card)
     }
 
     const types = [
@@ -71,14 +74,21 @@ const ActiveDecklist = () => {
         }
     })
 
+    const handleCardFocus = (type, index) => setHovered({ type, index })
+    const handleCardBlur = () => setHovered({})
+
     return (
         <main className="active">
             <section className="active__selected">
                 <div className="active__visual">
                     {selectedImg && <img src={selectedImg} alt="magic card" className="active__card-img" />}
                 </div>
-                <div className="active__details">
-
+                <div className="active__details-box">
+                    {selectedDetails.name && <h3 className="active__details">{selectedDetails.name}</h3>}
+                    {selectedDetails.cmc && <p className="active__details">cmc: {selectedDetails.cmc}</p>}
+                    {selectedDetails.manaCost && <p className="active__details">{selectedDetails.manaCost}</p>}
+                    {selectedDetails.power && <p className="active__details">power: {selectedDetails.power}</p>}
+                    {selectedDetails.toughness && <p className="active__details">toughness: {selectedDetails.toughness}</p>}
                 </div>
             </section>
             <section className="active__right">
@@ -92,8 +102,11 @@ const ActiveDecklist = () => {
                                     <article className="active__label"><h3>{type} ({TypedCards[type].length})</h3></article>
                                     {TypedCards[type].map((card, index) => {
                                         return (
-                                            <article key={index} className="active__bar">
-                                                <p className={selected.type === type && selected.index === index ? "active__card-name--selected" : "active__card-name"} onClick={() => { handleSelect(type, index, card.imageUrl) }}>{card.name}</p>
+                                            <article key={index} onMouseEnter={() => { handleCardFocus(type, index) }} onMouseLeave={handleCardBlur}
+                                                className={selected.type === type && selected.index === index ? "active__bar--selected" : "active__bar"}
+                                            >
+                                                {hovered.type === type && hovered.index === index && <img src={card.imageUrl || cardBack} alt={card.name} className="active__hoverImg" />}
+                                                <p className="active__card-name" onClick={() => { handleSelect(type, index, card) }}>{card.name}</p>
                                             </article>
                                         )
                                     })}

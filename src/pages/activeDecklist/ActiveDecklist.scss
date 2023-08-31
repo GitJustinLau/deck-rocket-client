@@ -12,12 +12,11 @@
     background-color: $background;
     padding: 1rem 2rem;
 
-
     &__selected {
         display: flex;
         flex-direction: column;
         gap: 2rem;
-        width: calc(50% - 2rem);
+        width: calc(50vw - 2rem);
         height: calc(100% - 10rem);
         position: fixed;
         align-items: center;
@@ -35,11 +34,12 @@
         box-shadow: $box-shadow;
     }
 
-    &__details {
+    &__details-box {
         height: 40%;
         width: 60%;
         background-color: $dark;
         box-shadow: $box-shadow;
+        padding: 1rem;
     }
 
 
@@ -47,10 +47,6 @@
         width: 50%;
         height: 100%;
         align-self: flex-end;
-    }
-
-    &__decklist {
-        height: 100%;
         padding: .5rem;
     }
 
@@ -61,18 +57,35 @@
     }
 
     &__cards {
-        display: flex;
-        flex-direction: column;
-        flex-wrap: wrap;
-        max-height: 100vh;
+        column-count: 2;
     }
 
     &__type {
         margin: .5rem;
         min-width: 10rem;
-        width: 40%;
+        width: 100%;
+        break-inside: avoid-column;
     }
 
+    &__bar {
+        position: relative;
+
+        &:hover {
+            background-color: $dark;
+        }
+
+        &--selected {
+            background-color: $accent;
+        }
+    }
+
+    &__hoverImg {
+        position: absolute;
+        z-index: 100;
+        height: 12rem;
+        left: -140px;
+        border-radius: 10px;
+    }
     &__card-name {
         margin: 0.25rem 0;
         white-space: nowrap;
@@ -80,10 +93,5 @@
         text-overflow: ellipsis;
         padding: 0 0.5rem;
         width: 80%;
-
-        &--selected {
-            @extend .active__card-name;
-            background-color: $dark;
-        }
     }
 }

@@ -1,0 +1,13 @@
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+
+.sideBar {
+    width: 5rem;
+    height: calc(100vh - 4rem);
+    background-color: $side;
+    position: fixed;
+    top: 4rem;
+    z-index: 100;
+    border-right: 2px solid $dark;
+    box-shadow: $box-shadow;
+}

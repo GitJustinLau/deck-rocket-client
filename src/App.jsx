@@ -6,11 +6,13 @@ import Login from "./pages/Login/Login";
 import Signup from "./pages/Signup/Signup";
 import ActiveDecklist from "./pages/ActiveDecklist/ActiveDecklist";
 import Header from "./Components/Header/Header";
+import SideBar from "./Components/SideBar/SideBar";
 
 function App() {
   return (
     <BrowserRouter>
       <Header />
+      <SideBar />
       <Routes>
         <Route path="/" element={<Dashboard />} />
         <Route path="/login" element={<Login />} />
