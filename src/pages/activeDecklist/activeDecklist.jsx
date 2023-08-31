@@ -8,7 +8,7 @@ import cardBack from '../../assets/images/magic_card_back.jpg';
 const ActiveDecklist = () => {
     const { decklistId } = useParams();
     const [cards, setCards] = useState([])
-    const [selected, setSelected] = useState()
+    const [selected, setSelected] = useState({})
     const [selectedImg, setSelectedImg] = useState(null)
 
     const fetchData = async () => {
@@ -26,20 +26,48 @@ const ActiveDecklist = () => {
 
     const addCard = async (cardName) => {
         try {
-            await axios.post(`${process.env.REACT_APP_URL}/decklists/${decklistId}`, {
-                cardName: cardName
-            })
-            fetchData()
+            await axios.post(`${process.env.REACT_APP_URL}/decklists/${decklistId}`, { cardName: cardName })
+            fetchData();
         } catch (err) {
             console.error('Error adding card:', err);
         }
     }
 
-    const handleSelect = (index, url) => {
-        setSelected(index)
+    const handleSelect = (type, index, url) => {
+        setSelected({ type, index })
         setSelectedImg(url || cardBack)
-
     }
+
+    const types = [
+        'Artifact',
+        'Conspiracy',
+        'Creature',
+        'Enchantment',
+        'Instant',
+        'Land',
+        'Phenomenon',
+        'Plane',
+        'Planeswalker',
+        'Scheme',
+        'Sorcery',
+        'Tribal',
+        'Vanguard',
+    ]
+
+    const TypedCards = {};
+    types.forEach(type => TypedCards[type] = []);
+
+    cards.forEach(card => {
+        if (TypedCards[card.types[0]]) {
+            TypedCards[card.types[0]].push(card);
+        }
+    });
+
+    Object.keys(TypedCards).forEach((type) => {
+        if (TypedCards[type].length === 0) {
+            delete TypedCards[type]
+        }
+    })
 
     return (
         <main className="active">
@@ -54,14 +82,22 @@ const ActiveDecklist = () => {
             <section className="active__right">
                 <SearchBar addCard={addCard} className="active__search" />
                 <div className="active__decklist">
-                    {cards.map((card, index) => {
-                        return <article key={index} className="active__bar">
-                            <p className={selected === index ? "active__name--selected" : "active__name"} onClick={() => { handleSelect(index, card.imageUrl) }}>{card.name}</p>
-                        </article>
+                    {Object.keys(TypedCards).map((type, index) => {
+                        return (
+                            <div className="active__type" key={index}>
+                                <article className="active__label"><h3>{type}</h3></article>
+                                {TypedCards[type].map((card, index) => {
+                                    return (
+                                        <article key={index} className="active__bar">
+                                            <p className={selected.type === type && selected.index === index ? "active__name--selected" : "active__name"} onClick={() => { handleSelect(type, index, card.imageUrl) }}>{card.name}</p>
+                                        </article>
+                                    )
+                                })}
+                            </div>
+                        )
                     })}
                 </div>
             </section>
-
         </main>
     )
 }
