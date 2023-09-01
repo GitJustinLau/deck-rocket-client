@@ -25,6 +25,7 @@
     &__results {
         top: 2rem;
         position: absolute;
+        z-index: 2;
         white-space: nowrap;
         background-color: $dark;
         

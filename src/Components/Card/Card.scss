@@ -1,0 +1,52 @@
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+
+.card {
+    &__bar {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 1rem;
+
+        &:hover {
+            @extend .card__bar;
+            background-color: $dark;
+        }
+
+        &--selected {
+            @extend .card__bar;
+            background-color: $accent;
+        }
+    }
+
+    &__hoverImg {
+        position: absolute;
+        z-index: 2;
+        height: 12rem;
+        left: -140px;
+        border-radius: 10px;
+    }
+
+    &__name {
+        margin: 0.25rem 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 80%;
+    }
+
+    &__dropdown-icon {
+        position: relative;
+        height: 1rem;
+    }
+
+    &__dropdown-item {
+        position: absolute;
+        top: 23px;
+        right: 1rem;
+        z-index: 2;
+        padding: 0.25rem 0.5rem;
+        background-color: $side;
+    }
+}

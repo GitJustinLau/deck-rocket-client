@@ -1,9 +1,11 @@
 import axios from "axios";
-import SearchBar from "../../Components/SearchBar/SearchBar";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+
 import './ActiveDecklist.scss';
 import cardBack from '../../assets/images/magic_card_back.jpg';
+import Card from "../../Components/Card/Card";
+import SearchBar from "../../Components/SearchBar/SearchBar";
 
 const ActiveDecklist = () => {
     const { decklistId } = useParams();
@@ -12,7 +14,10 @@ const ActiveDecklist = () => {
     const [selected, setSelected] = useState({})
     const [selectedImg, setSelectedImg] = useState(cardBack)
     const [selectedDetails, setSelectedDetails] = useState({})
-    const [hovered, setHovered] = useState({})
+
+    useEffect(() => {
+        fetchData();
+    }, [])
 
     const fetchData = async () => {
         try {
@@ -24,16 +29,36 @@ const ActiveDecklist = () => {
         }
     }
 
-    useEffect(() => {
-        fetchData();
-    }, [])
+    const types = ['Artifact', 'Conspiracy', 'Creature', 'Enchantment', 'Instant', 'Land',
+        'Phenomenon', 'Plane', 'Planeswalker', 'Scheme', 'Sorcery', 'Tribal', 'Vanguard']
+    const TypedCards = {};
+    types.forEach(type => TypedCards[type] = []);
+    cards.forEach(card => {
+        if (TypedCards[card.types[0]]) {
+            TypedCards[card.types[0]].push(card);
+        }
+    });
+    Object.keys(TypedCards).forEach((type) => {
+        if (TypedCards[type].length === 0) {
+            delete TypedCards[type]
+        }
+    })
 
     const addCard = async (cardName) => {
         try {
-            await axios.post(`${process.env.REACT_APP_URL}/decklists/${decklistId}`, { cardName: cardName })
+            await axios.post(`${process.env.REACT_APP_URL}/decklists/${decklistId}/card`, { cardName: cardName })
             fetchData();
         } catch (err) {
             console.error('Error adding card:', err);
+        }
+    }
+
+    const handleRemove = async (card) => {
+        try {
+            await axios.patch(`${process.env.REACT_APP_URL}/decklists/${decklistId}/card`, { cardId: card.id })
+            fetchData();
+        } catch (err) {
+            console.error('Error removing card:', err);
         }
     }
 
@@ -43,45 +68,11 @@ const ActiveDecklist = () => {
         setSelectedDetails(card)
     }
 
-    const types = [
-        'Artifact',
-        'Conspiracy',
-        'Creature',
-        'Enchantment',
-        'Instant',
-        'Land',
-        'Phenomenon',
-        'Plane',
-        'Planeswalker',
-        'Scheme',
-        'Sorcery',
-        'Tribal',
-        'Vanguard',
-    ]
-
-    const TypedCards = {};
-    types.forEach(type => TypedCards[type] = []);
-
-    cards.forEach(card => {
-        if (TypedCards[card.types[0]]) {
-            TypedCards[card.types[0]].push(card);
-        }
-    });
-
-    Object.keys(TypedCards).forEach((type) => {
-        if (TypedCards[type].length === 0) {
-            delete TypedCards[type]
-        }
-    })
-
-    const handleCardFocus = (type, index) => setHovered({ type, index })
-    const handleCardBlur = () => setHovered({})
-
     return (
         <main className="active">
             <section className="active__selected">
                 <div className="active__visual">
-                    {selectedImg && <img src={selectedImg} alt="magic card" className="active__card-img" />}
+                    <img src={selectedImg} alt="magic card" className="active__card-img" />
                 </div>
                 <div className="active__details-box">
                     {selectedDetails.name && <h3 className="active__details">{selectedDetails.name}</h3>}
@@ -98,19 +89,10 @@ const ActiveDecklist = () => {
                     <div className="active__cards">
                         {Object.keys(TypedCards).map((type, index) => {
                             return (
-                                <div className="active__type" key={index}>
-                                    <article className="active__label"><h3>{type} ({TypedCards[type].length})</h3></article>
-                                    {TypedCards[type].map((card, index) => {
-                                        return (
-                                            <article key={index} onMouseEnter={() => { handleCardFocus(type, index) }} onMouseLeave={handleCardBlur}
-                                                className={selected.type === type && selected.index === index ? "active__bar--selected" : "active__bar"}
-                                            >
-                                                {hovered.type === type && hovered.index === index && <img src={card.imageUrl || cardBack} alt={card.name} className="active__hoverImg" />}
-                                                <p className="active__card-name" onClick={() => { handleSelect(type, index, card) }}>{card.name}</p>
-                                            </article>
-                                        )
-                                    })}
-                                </div>
+                            <div className="active__type" key={index}>
+                                <article className="active__label"><h3>{type} ({TypedCards[type].length})</h3></article>
+                                {TypedCards[type].map((card, index) => <Card key={index} type={type} card={card} index={index} selected={selected} handleSelect={handleSelect} handleRemove={handleRemove} />)}
+                            </div>
                             )
                         })}
                     </div>
