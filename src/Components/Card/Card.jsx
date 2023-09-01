@@ -21,14 +21,13 @@ const Card = ({ type, card, index, selected, handleSelect, handleRemove }) => {
 
     return (
         <article onMouseEnter={() => { handleCardFocus(type, index) }} onMouseLeave={handleCardBlur} className={selected.type === type && selected.index === index ? "card__bar--selected" : "card__bar"} >
-            {hovered.type === type && hovered.index === index &&
-                <img src={card.imageUrl || cardBack} alt={card.name} className="card__hoverImg" />}
+            {hovered.type === type && hovered.index === index && <img src={card.imageUrl || cardBack} alt={card.name} className="card__hoverImg" />}
             <p className="card__name" onClick={() => { handleSelect(type, index, card) }}>{card.name}</p>
             <div className="card__dropdown" onBlur={handleDropdownBlur} tabIndex="0">
-                <img src={dropdown} alt="dropdown icon" className="card__dropdown-icon" onClick={() => { handledropdown(type, index) }}  />
+                <img src={dropdown} alt="dropdown icon" className="card__dropdown-icon" onClick={() => { handledropdown(type, index) }} />
                 {activeDropdown.type === type && activeDropdown.index === index &&
-                    <div className="card__dropdown-item" onClick={() => { handleRemove(card) }}>
-                        <p>Remove Card</p>
+                    <div className="card__dropdown-item" onClick={() => { handleRemove(card, type, index) }}>
+                        <p className='card__dropdown-text'>Remove Card</p>
                     </div>}
             </div>
         </article>

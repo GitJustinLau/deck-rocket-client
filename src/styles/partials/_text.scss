@@ -31,7 +31,7 @@ a,
 button {
     font-size: 0.8125rem; // 13px
     line-height: 1.25rem; // 20px
-    color: $secondary-text;
+    color: $secondary;
     font-weight: 600;
 
     @include tablet {
@@ -43,7 +43,7 @@ button {
 h4 {
     font-size: 0.6875rem; // 11px
     line-height: 1rem; // 16px
-    color: $secondary-text;
+    color: $secondary;
     text-transform: uppercase;
 
     @include tablet {

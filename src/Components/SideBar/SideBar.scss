@@ -8,14 +8,22 @@
     position: fixed;
     top: 4rem;
     z-index: 2;
-    border-right: 2px solid $dark;
     box-shadow: $box-shadow;
 
     display: flex;
     flex-direction: column;
     gap: 2rem;
     align-items: center;
-    padding: 2rem .5rem;
+    padding: 2rem 0;
+
+    &__container {
+        width: 100%;
+        padding: 1rem;
+        &--active {
+            @extend .sideBar__container;
+            background-color: $dark;
+        }
+    }
 
     &__icon {
         height: 2rem;

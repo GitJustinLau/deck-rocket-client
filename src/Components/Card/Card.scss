@@ -29,11 +29,18 @@
     }
 
     &__name {
-        margin: 0.25rem 0;
+        margin: 2px 0;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        width: 80%;
+        width: 100%;
+    }
+
+    &__dropdown {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     &__dropdown-icon {
@@ -43,10 +50,20 @@
 
     &__dropdown-item {
         position: absolute;
-        top: 23px;
-        right: 1rem;
+        right: -16px;
+        top: 20px;
         z-index: 2;
-        padding: 0.25rem 0.5rem;
+        padding: 0.25rem 1.5rem;
         background-color: $side;
+        box-shadow: $box-shadow;
+
+        &:hover {
+            @extend .card__dropdown-item;
+            border: 2px solid $background;
+        }
+    }
+
+    &__dropdown-text {
+        white-space: nowrap;
     }
 }

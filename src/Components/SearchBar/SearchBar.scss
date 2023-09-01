@@ -23,12 +23,14 @@
     }
 
     &__results {
-        top: 2rem;
+        top: 28px;
         position: absolute;
         z-index: 2;
         white-space: nowrap;
         background-color: $dark;
-        
+        min-width: 15rem;
+        padding: 0 .5rem;
+        box-shadow: $box-shadow;
     }
 
     &__loading {
@@ -37,6 +39,15 @@
 
     &__option {
         color: $primary-text;
-        margin: .25rem;
+        padding: .25rem;
+        border-top: 1px solid $secondary;
+
+        &:first-child {
+            border-top: none;
+        }
+
+        &:hover {
+            background-color: $accent;
+        }
     }
 }

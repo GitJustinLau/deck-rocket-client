@@ -6,14 +6,16 @@ const SideBar = () => {
 
     const [active, setActive] = useState(false)
 
-    const handleClick = () => setActive(true)
+    const handleClick = () => {
+        
+    }
 
     return (
-        <aside className="sideBar" onClick={handleClick}>
-            <div className="sideBar__container">
+        <aside className="sideBar" >
+            <div className="sideBar__container" onClick={handleClick}>
                 <img src={notes} alt="details icon" className="sideBar__icon" />
             </div>
-            <div className="sideBar__container">
+            <div className="sideBar__container" onClick={handleClick}>
                 <img src={chart} alt="chart icon" className="sideBar__icon" />
             </div>
         </aside>

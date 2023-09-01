@@ -60,11 +60,11 @@ const SearchBar = ({ addCard }) => {
             {active && searchInput && isLoading && <div className="search__loading">
                 <LoadingIcon />
             </div>}
-            <div className="search__results" >
+            {active && !isLoading && searchInput && <div className="search__results" >
                 {active && !isLoading && searchInput && inputList.map((cardName, index) => {
                     return <div className='search__option' key={index} onClick={() => { handleClick(cardName) }}>{cardName}</div>
                 })}
-            </div>
+            </div>}
         </article>
     )
 }
