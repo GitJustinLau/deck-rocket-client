@@ -15,7 +15,7 @@ const ActiveDecklist = () => {
     const [cards, setCards] = useState([])
     const [selected, setSelected] = useState({})
     const [selectedImg, setSelectedImg] = useState(cardBack)
-    const [selectedDetails, setSelectedDetails] = useState({})
+    const [selectedDetailsInput, setSelectedDetailsInput] = useState({})
 
     useEffect(() => {
         fetchData();
@@ -59,7 +59,7 @@ const ActiveDecklist = () => {
         try {
             if (selected.type === type && selected.index === index) {
                 setSelectedImg(cardBack)
-                setSelectedDetails({})
+                setSelectedDetailsInput({})
                 setSelected({})
             }
             await axios.patch(`${process.env.REACT_APP_URL}/decklists/${decklistId}/card`, { cardId: card.id })
@@ -72,7 +72,7 @@ const ActiveDecklist = () => {
     const handleSelect = (type, index, card) => {
         setSelectedImg(card.imageUrl || cardBack)
         setSelected({ type, index })
-        setSelectedDetails(card)
+        setSelectedDetailsInput(card)
     }
 
     return (
@@ -83,7 +83,7 @@ const ActiveDecklist = () => {
                     <div className="active__visual">
                         <img src={selectedImg} alt="magic card" className="active__card-img" />
                     </div>
-                    <CardDetails selectedDetails={selectedDetails} />
+                    <CardDetails card={selectedDetailsInput} />
                 </section>
                 <section className="active__right">
                     <SearchBar addCard={addCard} className="active__search" />
