@@ -31,14 +31,14 @@ const ActiveDecklist = () => {
         }
     }
 
-    const types = ['Artifact', 'Conspiracy', 'Creature', 'Enchantment', 'Instant', 'Land',
+    const types = ['Artifact', 'Battle', 'Conspiracy', 'Creature', 'Dungeon', 'Enchantment', 'Instant', 'Land',
         'Phenomenon', 'Plane', 'Planeswalker', 'Scheme', 'Sorcery', 'Tribal', 'Vanguard']
     const TypedCards = {};
     types.forEach(type => TypedCards[type] = []);
     cards.forEach(card => {
-        if (TypedCards[card.types[0]]) {
-            TypedCards[card.types[0]].push(card);
-        }
+        let cardTypeIndex = -1
+        card.types.forEach((type) => {if (cardTypeIndex === -1) {cardTypeIndex = types.indexOf(type)}})
+        TypedCards[types[cardTypeIndex]].push(card); // cardTypeIndex = -1 will never happen, all cards in magic have at least one type in 'types' array
     });
     Object.keys(TypedCards).forEach((type) => {
         if (TypedCards[type].length === 0) {
