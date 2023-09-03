@@ -27,7 +27,7 @@ const CardDetails = ({ card }) => {
                     if (index % 2 !== 0) {
                         return <span><img src={`${process.env.REACT_APP_URL}/images/${text}.png`} alt={`mana cost - ${text}`} className="details__symbol" /></span>
                     } else {
-                        return <span>{text}</span>
+                        return `${text}`
                     }
                 })}
             </p>
