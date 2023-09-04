@@ -56,6 +56,7 @@ const ActiveDecklist = () => {
     }
 
     const handleRemove = async (card, type, index) => {
+        console.log("handleRemove")
         try {
             if (selected.type === type && selected.index === index) {
                 setSelectedImg(cardBack)
@@ -75,8 +76,11 @@ const ActiveDecklist = () => {
         setSelectedDetailsInput(card)
     }
 
-    const handleQTYBlur = async (quantity, card) => {
-        console.log("handleQTYBlur has run")
+    const handleQTYBlur = async (quantity, card, type, index) => {
+        if (quantity === '0') {
+            console.log("handleQTYBlur")
+            handleRemove(card, type, index)
+        }
         try {
             await axios.patch(`${process.env.REACT_APP_URL}/decklists/${decklistId}/card`, { cardId: card.id, updateColumn: "quantity", updateValue: quantity })
         } catch (err) {
@@ -86,7 +90,7 @@ const ActiveDecklist = () => {
 
     return (
         <>
-            <SideBar />
+            <SideBar cards={cards} />
             <main className="active">
                 <section className="active__selected">
                     <div className="active__visual">
