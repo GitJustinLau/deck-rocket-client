@@ -8,6 +8,7 @@
         align-items: center;
         justify-content: space-between;
         padding: 0 1rem;
+        gap: 1rem;
 
         &:hover {
             @extend .card__bar;
@@ -28,6 +29,14 @@
         border-radius: 10px;
     }
 
+    &__quantity {
+        background-color: $side;
+        color: $primary-text;
+        border: none;
+        width: 2rem;
+        text-align: center;
+        padding: 0 0.25rem;
+    }
     &__name {
         margin: 2px 0;
         white-space: nowrap;
@@ -66,4 +75,10 @@
     &__dropdown-text {
         white-space: nowrap;
     }
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

@@ -37,7 +37,7 @@ const ActiveDecklist = () => {
     types.forEach(type => TypedCards[type] = []);
     cards.forEach(card => {
         let cardTypeIndex = -1
-        card.types.forEach((type) => {if (cardTypeIndex === -1) {cardTypeIndex = types.indexOf(type)}})
+        card.types.forEach((type) => { if (cardTypeIndex === -1) { cardTypeIndex = types.indexOf(type) } })
         TypedCards[types[cardTypeIndex]].push(card); // cardTypeIndex = -1 will never happen, all cards in magic have at least one type in 'types' array
     });
     Object.keys(TypedCards).forEach((type) => {
@@ -62,7 +62,7 @@ const ActiveDecklist = () => {
                 setSelectedDetailsInput({})
                 setSelected({})
             }
-            await axios.patch(`${process.env.REACT_APP_URL}/decklists/${decklistId}/card`, { cardId: card.id })
+            await axios.patch(`${process.env.REACT_APP_URL}/decklists/${decklistId}/card`, { cardId: card.id, updateColumn: "is_removed", updateValue: true })
             fetchData();
         } catch (err) {
             console.error('Error removing card:', err);
@@ -73,6 +73,15 @@ const ActiveDecklist = () => {
         setSelectedImg(card.imageUrl || cardBack)
         setSelected({ type, index })
         setSelectedDetailsInput(card)
+    }
+
+    const handleQTYBlur = async (quantity, card) => {
+        console.log("handleQTYBlur has run")
+        try {
+            await axios.patch(`${process.env.REACT_APP_URL}/decklists/${decklistId}/card`, { cardId: card.id, updateColumn: "quantity", updateValue: quantity })
+        } catch (err) {
+            console.error('Error updating qty:', err);
+        }
     }
 
     return (
@@ -94,7 +103,7 @@ const ActiveDecklist = () => {
                                 return (
                                     <div className="active__type" key={index}>
                                         <article className="active__label"><h3>{type} ({TypedCards[type].length})</h3></article>
-                                        {TypedCards[type].map((card, index) => <Card key={index} type={type} card={card} index={index} selected={selected} handleSelect={handleSelect} handleRemove={handleRemove} />)}
+                                        {TypedCards[type].map((card, index) => <Card key={index} type={type} card={card} index={index} selected={selected} handleSelect={handleSelect} handleRemove={handleRemove} handleQTYBlur={handleQTYBlur} />)}
                                     </div>
                                 )
                             })}
