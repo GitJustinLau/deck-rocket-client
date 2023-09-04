@@ -1,23 +1,32 @@
 import { useState } from 'react';
 import './SideBar.scss';
 import notes from '../../assets/icons/notes-svgrepo-com.svg'
-import chart from '../../assets/icons/chart-line-svgrepo-com.svg'
-const SideBar = () => {
+import charts from '../../assets/icons/chart-line-svgrepo-com.svg'
+const SideBar = ({cards}) => {
 
-    const [active, setActive] = useState(false)
+    const [active, setActive] = useState("notes")
 
-    const handleClick = () => {
-        
+    const handleNotesClick = () => {
+        setActive("notes")
+    }
+
+    const handleChartsClick = () => {
+        setActive("charts")
     }
 
     return (
-        <aside className="sideBar" >
-            <div className="sideBar__container" onClick={handleClick}>
-                <img src={notes} alt="details icon" className="sideBar__icon" />
-            </div>
-            <div className="sideBar__container" onClick={handleClick}>
-                <img src={chart} alt="chart icon" className="sideBar__icon" />
-            </div>
+        <aside className="sidebar" >
+            {active === "charts" && <section className='sidebar__charts'>
+
+            </section>}
+            <section className='sidebar__bar'>
+                <div className={active === "notes" ? "sidebar__container--active" : "sidebar__container"} onClick={handleNotesClick}>
+                    <img src={notes} alt="details icon" className="sidebar__icon" />
+                </div>
+                <div className={active === "charts" ? "sidebar__container--active" : "sidebar__container"} onClick={handleChartsClick}>
+                    <img src={charts} alt="chart icon" className="sidebar__icon" />
+                </div>
+            </section>
         </aside>
     )
 }

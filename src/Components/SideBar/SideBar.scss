@@ -1,8 +1,7 @@
 @use "../../styles/partials/mixins" as *;
 @use "../../styles/partials/variables" as *;
 
-.sideBar {
-    width: 4rem;
+.sidebar {
     height: calc(100vh - 4rem);
     background-color: $side;
     position: fixed;
@@ -11,17 +10,27 @@
     box-shadow: $box-shadow;
 
     display: flex;
-    flex-direction: column;
     gap: 2rem;
-    align-items: center;
     padding: 2rem 0;
+
+    &__bar {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        align-items: center;
+        
+        width: 4rem;
+        height: 100%;
+    }
 
     &__container {
         width: 100%;
         padding: 1rem;
+
         &--active {
-            @extend .sideBar__container;
+            @extend .sidebar__container;
             background-color: $dark;
+            box-shadow: inset $box-shadow;
         }
     }
 
