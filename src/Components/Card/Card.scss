@@ -50,6 +50,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        padding: 0.5rem;
     }
 
     &__dropdown-icon {
@@ -60,7 +61,7 @@
     &__dropdown-item {
         position: absolute;
         right: -16px;
-        top: 20px;
+        top: calc(50% + 0.5rem);
         z-index: 2;
         padding: 0.25rem 1.5rem;
         background-color: $side;
@@ -77,6 +78,7 @@
     }
 }
 
+//hide stepper arrows for input element: type=number
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;

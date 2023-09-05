@@ -3,6 +3,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import deleteIcon from '../../assets/icons/delete.svg';
+import dropdown from '../../assets/icons/chevron-down-svgrepo-com.svg';
 
 function Dashboard() {
   const [user, setUser] = useState(null);
@@ -10,6 +11,10 @@ function Dashboard() {
   const [userDecklists, setUserDecklists] = useState([])
   const [errMsg, setErrMsg] = useState('')
   const [postErr, setPostErr] = useState(false)
+  const [activeDropdown, setActiveDropdown] = useState({})
+
+  const handledropdown = (id) => setActiveDropdown({ id })
+  const handleDropdownBlur = () => setActiveDropdown({})
 
   useEffect(() => {
     const token = sessionStorage.getItem("token");
@@ -100,12 +105,18 @@ function Dashboard() {
         <button>icon</button>
       </form>
       {postErr && errMsg}
-      {userDecklists.map((decklist, index) => {
-        return <article key={index}>
+      {userDecklists.map((decklist) => {
+        return <article key={decklist.id} className="dashboard__decklist">
           <Link to={`/decklists/${decklist.id}`}>
-            <p>{decklist.name}</p>
+            <p className="dashboard__name">{decklist.name}</p>
           </Link>
-          <img src={deleteIcon} alt="trash can" onClick={() => handleDel(decklist.id)} />
+          <div className="dashboard__dropdown" onBlur={handleDropdownBlur} tabIndex="0">
+            <img src={dropdown} alt="dropdown icon" className="dashboard__dropdown-icon" onClick={() => { handledropdown(decklist.id) }} />
+            {activeDropdown.id === decklist.id &&
+              <div className="dashboard__dropdown-item" onClick={() => handleDel(decklist.id)}>
+                <p className='dashboard__dropdown-text'>Remove Decklist</p>
+              </div>}
+          </div>
         </article>
       })}
     </main>

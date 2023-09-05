@@ -16,8 +16,9 @@ const SideBar = ({cards}) => {
 
     return (
         <aside className="sidebar" >
-            {active === "charts" && <section className='sidebar__charts'>
-
+            {active === "charts" && 
+            <section className='sidebar__charts'>
+                <h1>Come back this Thursday!</h1>
             </section>}
             <section className='sidebar__bar'>
                 <div className={active === "notes" ? "sidebar__container--active" : "sidebar__container"} onClick={handleNotesClick}>

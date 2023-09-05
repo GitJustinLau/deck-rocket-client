@@ -7,4 +7,52 @@
     min-height: 100vh;
     position: relative;
     top: 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+    &__decklist {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+
+        border: 2px solid $dark;
+    }
+
+    &__name {
+        padding: 1rem 2rem;
+    }
+
+    &__dropdown {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0.5rem;
+    }
+
+    &__dropdown-icon {
+        position: relative;
+        height: 1rem;
+    }
+
+    &__dropdown-item {
+        position: absolute;
+        right: -16px;
+        top: calc(50% + 0.5rem);
+        z-index: 2;
+        padding: 0.25rem 1.5rem;
+        background-color: $side;
+        box-shadow: $box-shadow;
+
+        &:hover {
+            @extend .dashboard__dropdown-item;
+            border: 2px solid $background;
+        }
+    }
+
+    &__dropdown-text {
+        white-space: nowrap;
+    }
 }

@@ -56,7 +56,6 @@ const ActiveDecklist = () => {
     }
 
     const handleRemove = async (card, type, index) => {
-        console.log("handleRemove")
         try {
             if (selected.type === type && selected.index === index) {
                 setSelectedImg(cardBack)
@@ -77,12 +76,13 @@ const ActiveDecklist = () => {
     }
 
     const handleQTYBlur = async (quantity, card, type, index) => {
-        if (quantity === '0') {
-            console.log("handleQTYBlur")
-            handleRemove(card, type, index)
-        }
         try {
             await axios.patch(`${process.env.REACT_APP_URL}/decklists/${decklistId}/card`, { cardId: card.id, updateColumn: "quantity", updateValue: quantity })
+            if (quantity === '0') {
+                handleRemove(card, type, index)
+            } else {
+                fetchData();
+            }
         } catch (err) {
             console.error('Error updating qty:', err);
         }
@@ -101,13 +101,13 @@ const ActiveDecklist = () => {
                 <section className="active__right">
                     <SearchBar addCard={addCard} className="active__search" />
                     <div className="active__decklist">
-                        <h2 className="active__name">{decklistName} ({cards.length})</h2>
+                        <h2 className="active__name">{decklistName} ({cards.reduce((acc, cur) => acc + cur.quantity, 0)})</h2>
                         <div className="active__cards">
-                            {Object.keys(TypedCards).map((type, index) => {
+                            {Object.keys(TypedCards).map((type, typeIndex) => {
                                 return (
-                                    <div className="active__type" key={index}>
+                                    <div className="active__type" key={typeIndex}>
                                         <article className="active__label"><h3>{type} ({TypedCards[type].length})</h3></article>
-                                        {TypedCards[type].map((card, index) => <Card key={index} type={type} card={card} index={index} selected={selected} handleSelect={handleSelect} handleRemove={handleRemove} handleQTYBlur={handleQTYBlur} />)}
+                                        {TypedCards[type].map((card, cardIndex) => <Card key={card.id} cardType={type} card={card} index={cardIndex} selected={selected} handleSelect={handleSelect} handleRemove={handleRemove} handleQTYBlur={handleQTYBlur} />)}
                                     </div>
                                 )
                             })}
