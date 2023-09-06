@@ -2,13 +2,14 @@
 @use "../../styles/partials/variables" as *;
 
 .signup-page {
-    background-color: $background;
-    min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 1rem;
+
+    background-color: $side;
+    border-radius: 1rem;
 }
 
 .signup {
@@ -47,5 +48,10 @@
         border-left: 5px solid #ddd;
         padding: 0.75rem;
         margin-top: 2rem;
+    }
+
+    &__span {
+        color: $secondary;
+        cursor: pointer;
     }
 }

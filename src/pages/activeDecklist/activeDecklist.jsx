@@ -19,7 +19,7 @@ const ActiveDecklist = () => {
 
     useEffect(() => {
         fetchData();
-    }, [])
+    }, [decklistId])
 
     const fetchData = async () => {
         try {

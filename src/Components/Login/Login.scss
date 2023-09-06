@@ -2,13 +2,19 @@
 @use "../../styles/partials/variables" as *;
 
 .login-page {
-    background-color: $background;
-    min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
     padding: 1rem;
+    background-color: $side;
+    border-radius: 1rem;
+
+    &__span {
+        color: $secondary;
+        cursor: pointer;
+    }
 }
 
 .login {
@@ -16,7 +22,7 @@
     flex-direction: column;
     width: 22rem;
     box-shadow: 0 2px 16px rgba(0, 0, 0, 0.1);
-    background-color: $side;
+
     border-radius: 0.5rem;
     padding: 2rem 1.5rem;
     margin-bottom: 1rem;

@@ -1,0 +1,24 @@
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+
+.user {
+    position: relative;
+
+    &__header {
+        display: flex;
+        gap: 1rem;
+    }
+
+    &__pfp-frame {
+        height: 2rem;
+        width: 2rem;
+        border-radius: 50%;
+        background-color: $accent;
+    }
+
+    &__expanded {
+        position: absolute;
+        top: 2.5rem;
+        right: 0;
+    }
+}
