@@ -10,18 +10,54 @@
     display: flex;
     flex-direction: column;
     align-items: flex-end;
+    gap: 1rem;
+
+    &__logout {
+        padding: 0.25rem 0.5rem;
+        background-color: $dark;
+        columns: $primary-text;
+        border: none;
+    }
+    &__form {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+    }
+
+    &__input {
+        padding: 0.25rem;
+    }
+
+    &__add {
+        width: 1.5rem;
+    }
+    &__warning {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    &__warning-icon {
+        width: 1.5rem;
+    }
+
+    &__new-deck {
+        margin: 0.5rem;
+        font-size: 1.5rem;
+        background-color: transparent;
+        border: none;
+        color: $primary-text;
+    }
 
     &__decklist {
         display: flex;
         justify-content: space-between;
         align-items: center;
         gap: 1rem;
-
         border: 2px solid $dark;
     }
 
     &__name {
-        padding: 1rem 2rem;
+        padding: 0.5rem 2rem;
     }
 
     &__dropdown {

@@ -2,10 +2,11 @@ import "./Dashboard.scss";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import deleteIcon from '../../assets/icons/delete.svg';
+import addIcon from '../../assets/icons/plus-svgrepo-com.svg';
+import warningIcon from '../../assets/icons/circle-warning-svgrepo-com.svg'
 import dropdown from '../../assets/icons/chevron-down-svgrepo-com.svg';
 
-function Dashboard() {
+function Dashboard({ handleLogOut }) {
   const [user, setUser] = useState(null);
   const [failedAuth, setFailedAuth] = useState(false);
   const [userDecklists, setUserDecklists] = useState([])
@@ -76,6 +77,7 @@ function Dashboard() {
     sessionStorage.removeItem("token");
     setUser(null);
     setFailedAuth(true);
+    handleLogOut()
   };
 
   if (failedAuth) {
@@ -97,14 +99,19 @@ function Dashboard() {
 
   return (
     <main className="dashboard">
-      <p>{user.username}</p>
       <button className="dashboard__logout" onClick={handleLogout}>Log out</button>
       <h2>My Decklists</h2>
-      <form onSubmit={handleSubmit}>
-        <input type="text" name="name" placeholder="New Decklist here..." />
-        <button>icon</button>
+      <form onSubmit={handleSubmit} className="dashboard__form">
+        <input type="text" name="name" placeholder="New Decklist here..." className="dashboard__input" />
+        <button className="dashboard__new-deck">
+          <img src={addIcon} alt="" className="dashboard__add" />
+        </button>
       </form>
-      {postErr && errMsg}
+      {postErr &&
+        <p className="dashboard__warning">
+          <img src={warningIcon} alt="warning icon" className="dashboard__warning-icon" />
+          {errMsg}
+        </p>}
       {userDecklists.map((decklist) => {
         return <article key={decklist.id} className="dashboard__decklist">
           <Link to={`/decklists/${decklist.id}`}>

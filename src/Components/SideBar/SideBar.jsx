@@ -2,7 +2,9 @@ import { useState } from 'react';
 import './SideBar.scss';
 import notes from '../../assets/icons/notes-svgrepo-com.svg'
 import charts from '../../assets/icons/chart-line-svgrepo-com.svg'
-const SideBar = ({cards}) => {
+import BarGraph from '../BarGraph/BarGraph';
+
+const SideBar = ({ cards }) => {
 
     const [active, setActive] = useState("notes")
 
@@ -16,10 +18,10 @@ const SideBar = ({cards}) => {
 
     return (
         <aside className="sidebar" >
-            {active === "charts" && 
-            <section className='sidebar__charts'>
-                <h1>Come back this Thursday!</h1>
-            </section>}
+            {active === "charts" &&
+                <section className='sidebar__charts'>
+                    <BarGraph />
+                </section>}
             <section className='sidebar__bar'>
                 <div className={active === "notes" ? "sidebar__container--active" : "sidebar__container"} onClick={handleNotesClick}>
                     <img src={notes} alt="details icon" className="sidebar__icon" />

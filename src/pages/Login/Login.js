@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 
-function Login() {
+function Login({handleLogIn}) {
     const [error, setError] = useState("");
     const navigate = useNavigate();
 
@@ -17,6 +17,7 @@ function Login() {
         })
             .then((response) => {
                 sessionStorage.setItem("token", response.data.token);
+                handleLogIn()
                 navigate('/');
             })
             .catch((error) => {
