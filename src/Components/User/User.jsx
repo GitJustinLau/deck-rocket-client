@@ -37,12 +37,7 @@ const User = () => {
     const handleLogIn = () => setLoginState(true)
     const handleLogOut = () => setLoginState(false)
 
-    const handleExpand = () => setExpanded(true)
-
-    const handleDashboardBlur = () => {
-        console.log("handleDashboardBlur")
-        setExpanded(false)
-    }
+    const handleExpand = () => setExpanded(!expanded)
 
     const handleSignUp = () => setLoggingIn(false)
     const handleLoggingIn = () => setLoggingIn(true)
@@ -54,9 +49,9 @@ const User = () => {
                 <div className='user__pfp-frame'>.</div>
             </div>
             <div className="user__expanded">
-                {expanded && loginState && <Dashboard handleLogOut={handleLogOut} handleDashboardBlur={handleDashboardBlur} />}
-                {expanded && !loginState && loggingIn && <Login handleLogIn={handleLogIn} handleSignUp={handleSignUp} handleDashboardBlur={handleDashboardBlur}/>}
-                {expanded && !loggingIn && <Signup handleLoggingIn={handleLoggingIn} handleDashboardBlur={handleDashboardBlur} />}
+                {expanded && loginState && <Dashboard handleLogOut={handleLogOut}  />}
+                {expanded && !loginState && loggingIn && <Login handleLogIn={handleLogIn} handleSignUp={handleSignUp} />}
+                {expanded && !loggingIn && <Signup handleLoggingIn={handleLoggingIn}  />}
             </div>
         </section>
 

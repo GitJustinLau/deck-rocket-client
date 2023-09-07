@@ -6,7 +6,7 @@ import addIcon from '../../assets/icons/plus-svgrepo-com.svg';
 import warningIcon from '../../assets/icons/circle-warning-svgrepo-com.svg'
 import dropdown from '../../assets/icons/chevron-down-svgrepo-com.svg';
 
-function Dashboard({ handleLogOut, handleDashboardBlur }) {
+function Dashboard({ handleLogOut }) {
   const [user, setUser] = useState(null);
   const [failedAuth, setFailedAuth] = useState(false);
   const [userDecklists, setUserDecklists] = useState([])
@@ -98,7 +98,8 @@ function Dashboard({ handleLogOut, handleDashboardBlur }) {
   }
 
   return (
-    <main className="dashboard" onBlur={handleDashboardBlur} tabIndex="0">
+
+    <main className="dashboard">
       <button className="dashboard__logout" onClick={handleLogout}>Log out</button>
       <h2>My Decklists</h2>
       <form onSubmit={handleSubmit} className="dashboard__form">
@@ -127,6 +128,8 @@ function Dashboard({ handleLogOut, handleDashboardBlur }) {
         </article>
       })}
     </main>
+
+
   );
 }
 

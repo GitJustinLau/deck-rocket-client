@@ -34,18 +34,22 @@ const ActiveDecklist = () => {
     const types = ['Artifact', 'Battle', 'Conspiracy', 'Creature', 'Dungeon', 'Enchantment', 'Instant', 'Land',
         'Phenomenon', 'Plane', 'Planeswalker', 'Scheme', 'Sorcery', 'Tribal', 'Vanguard']
     const TypedCards = {};
+    let deckCmc = [];
     types.forEach(type => TypedCards[type] = []);
     cards.forEach(card => {
         let cardTypeIndex = -1
         card.types.forEach((type) => { if (cardTypeIndex === -1) { cardTypeIndex = types.indexOf(type) } })
         TypedCards[types[cardTypeIndex]].push(card); // cardTypeIndex = -1 will never happen, all cards in magic have at least one type in 'types' array
+        if (!card.types.includes("Land")) {
+            deckCmc.push(card.cmc)
+        }
     });
     Object.keys(TypedCards).forEach((type) => {
         if (TypedCards[type].length === 0) {
             delete TypedCards[type]
         }
     })
-
+    deckCmc = Array.from(new Set(deckCmc)).sort()
     const addCard = async (cardName) => {
         try {
             await axios.post(`${process.env.REACT_APP_URL}/decklists/${decklistId}/card`, { cardName: cardName })
@@ -90,7 +94,7 @@ const ActiveDecklist = () => {
 
     return (
         <>
-            <SideBar cards={cards} />
+            <SideBar TypedCards={TypedCards} deckCmc={deckCmc}/>
             <main className="active">
                 <section className="active__selected">
                     <div className="active__visual">

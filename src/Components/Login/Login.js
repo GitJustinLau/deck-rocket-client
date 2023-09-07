@@ -2,9 +2,9 @@ import './Login.scss';
 import Input from "../../Components/Input/Input";
 import axios from 'axios';
 import { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-function Login({ handleLogIn, handleSignUp, handleDashboardBlur }) {
+function Login({ handleLogIn, handleSignUp }) {
     const [error, setError] = useState("");
     const navigate = useNavigate();
 
@@ -25,7 +25,7 @@ function Login({ handleLogIn, handleSignUp, handleDashboardBlur }) {
     };
 
     return (
-        <main className="login-page" onBlur={handleDashboardBlur} tabIndex="0">
+        <main className="login-page">
             <form className="login" onSubmit={handleSubmit}>
                 <Input type="text" name="email" label="Email" />
                 <Input type="password" name="password" label="Password" />

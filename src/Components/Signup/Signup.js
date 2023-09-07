@@ -1,10 +1,9 @@
 import "./Signup.scss";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import Input from "../../Components/Input/Input";
 
-function Signup ({handleLoggingIn, handleDashboardBlur}) {
+function Signup ({handleLoggingIn}) {
     const [error, setError] = useState("");
     const [success, setSuccess] = useState(false);
 
@@ -29,7 +28,7 @@ function Signup ({handleLoggingIn, handleDashboardBlur}) {
     };
 
     return (
-        <main className="signup-page" onBlur={handleDashboardBlur} tabIndex="0">
+        <main className="signup-page" >
             <form className="signup" onSubmit={handleSubmit}>
                 <h1 className="signup__title">Sign up</h1>
 
