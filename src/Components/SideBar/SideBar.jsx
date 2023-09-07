@@ -4,22 +4,18 @@ import notes from '../../assets/icons/notes-svgrepo-com.svg'
 import charts from '../../assets/icons/chart-line-svgrepo-com.svg'
 import Cmc from '../Cmc/Cmc';
 
-const SideBar = ({ TypedCards, deckCmc }) => {
-
+const SideBar = ({ TypedCards, deckCmc, cards }) => {
     const [active, setActive] = useState("notes")
-
-    const handleNotesClick = () => {
-        setActive("notes")
-    }
-
-    const handleChartsClick = () => {
-        setActive("charts")
-    }
+    const handleNotesClick = () => setActive("notes")
+    const handleChartsClick = () => setActive("charts")
 
     return (
         <aside className="sidebar" >
             {active === "charts" &&
                 <section className='sidebar__charts'>
+                    <h2>Average CMC: {
+                        (cards.reduce((acc, curr) => acc + Number(curr.cmc), 0) / cards.length).toFixed(2)
+                    }</h2>
                     <Cmc TypedCards={TypedCards} deckCmc={deckCmc} />
                 </section>}
             <section className='sidebar__bar'>

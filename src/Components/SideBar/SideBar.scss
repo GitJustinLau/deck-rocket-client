@@ -39,6 +39,9 @@
     }
 
     &__charts {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
         padding: 1rem;
         width: 42vw;
         border-right: 1px solid $secondary;

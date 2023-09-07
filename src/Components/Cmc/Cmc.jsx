@@ -28,7 +28,7 @@ function Cmc({ TypedCards, deckCmc }) {
   };
   return (
     <div className='cmc'>
-      <h1>Converted Mana Cost</h1>
+      <h2>Converted Mana Cost</h2>
       <Bar data={data} options={config} />
     </div>
   );

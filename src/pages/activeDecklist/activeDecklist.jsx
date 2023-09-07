@@ -1,8 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-
 import './ActiveDecklist.scss';
+import Tilt from 'react-parallax-tilt';
+
 import cardBack from '../../assets/images/magic_card_back.jpg';
 import Card from "../../Components/Card/Card";
 import SearchBar from "../../Components/SearchBar/SearchBar";
@@ -94,11 +95,13 @@ const ActiveDecklist = () => {
 
     return (
         <>
-            <SideBar TypedCards={TypedCards} deckCmc={deckCmc}/>
+            <SideBar TypedCards={TypedCards} deckCmc={deckCmc} cards={cards} />
             <main className="active">
                 <section className="active__selected">
                     <div className="active__visual">
-                        <img src={selectedImg} alt="magic card" className="active__card-img" />
+                        <Tilt>
+                            <img src={selectedImg} alt="magic card" className="active__card-img" />
+                        </Tilt>
                     </div>
                     <CardDetails card={selectedDetailsInput} />
                 </section>
