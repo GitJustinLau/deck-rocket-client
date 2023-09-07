@@ -12,6 +12,7 @@ function Cmc({ TypedCards, deckCmc }) {
       return {
         label: type,
         data: deckCmc.map((cmc) => TypedCards[type].filter((card) => card.cmc === cmc).length),
+        "borderWidth":"1",
         stack: 0,
       }
     })

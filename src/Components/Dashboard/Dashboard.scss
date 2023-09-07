@@ -12,8 +12,9 @@
     border-radius: 1rem;
 
     &__logout {
-        padding: 0.25rem 0.5rem;
+        padding: 0.25rem 1rem;
         background-color: $dark;
+        color: $primary-text;
         columns: $primary-text;
         border: none;
     }

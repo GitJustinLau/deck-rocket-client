@@ -3,12 +3,12 @@ import { Chart, RadialLinearScale, ArcElement, Colors, Tooltip, Legend } from 'c
 Chart.register(RadialLinearScale, ArcElement, Colors, Tooltip, Legend);
 
 const TypesPolar = ({ TypedCards = { TypedCards } }) => {
-    Chart.defaults.borderColor = '#9c9a9b';
 
     const data = {
         labels: Object.keys(TypedCards).map((type) => type),
         datasets: [{
                 data: Object.keys(TypedCards).map((type) => TypedCards[type].reduce((acc,curr) => acc + Number(curr.quantity),0)),
+                "borderWidth":"0",
             }]
     };
 
