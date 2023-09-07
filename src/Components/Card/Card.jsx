@@ -12,7 +12,7 @@ const Card = ({ cardType, card, index, selected, handleSelect, handleRemove, han
 
     useEffect(() => {
         setQuantity(card.quantity)
-    }, [])
+    }, [card.quantity])
 
     const handleCardFocus = (type, index) => setHovered({ type, index })
     const handleCardBlur = () => setHovered({})

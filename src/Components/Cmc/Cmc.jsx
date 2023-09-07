@@ -1,6 +1,4 @@
 import './Cmc.scss';
-import React from 'react';
-import 'chartjs-plugin-annotation';
 import { Bar } from 'react-chartjs-2';
 import { Chart, CategoryScale, LinearScale, BarElement, Colors, Tooltip, Legend } from 'chart.js';
 Chart.register(CategoryScale, LinearScale, BarElement, Colors, Tooltip, Legend);
