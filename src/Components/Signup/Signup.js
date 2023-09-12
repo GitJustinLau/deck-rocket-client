@@ -33,8 +33,8 @@ function Signup ({handleLoggingIn}) {
                 <h1 className="signup__title">Sign up</h1>
 
                 <Input type="text" name="username" label="Username" />
-                <Input type="password" name="password" label="Password" />
                 <Input type="text" name="email" label="Email" />
+                <Input type="password" name="password" label="Password" />
 
                 <button className="signup__button">Sign up</button>
 
