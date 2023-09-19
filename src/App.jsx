@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './App.scss';
 
-import ActiveDecklist from "./pages/ActiveDecklist/ActiveDecklist";
+import ActiveDecklist from "./pages/ActiveDecklist/ActiveDecklist.jsx";
 import Header from "./Components/Header/Header";
 
 function App() {

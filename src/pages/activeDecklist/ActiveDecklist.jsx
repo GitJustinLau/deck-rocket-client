@@ -19,12 +19,12 @@ const ActiveDecklist = () => {
     const [selectedDetailsInput, setSelectedDetailsInput] = useState({})
 
     useEffect(() => {
-        fetchData();
+        fetchData(decklistId);
     }, [decklistId])
 
-    const fetchData = async () => {
+    const fetchData = async (id) => {
         try {
-            const result = await axios.get(`${process.env.REACT_APP_URL}/decklists/${decklistId}`)
+            const result = await axios.get(`${process.env.REACT_APP_URL}/decklists/${id}`)
             setCards(result.data.cards)
             setDecklistName(result.data.name)
         } catch (err) {
@@ -54,7 +54,7 @@ const ActiveDecklist = () => {
     const addCard = async (cardName) => {
         try {
             await axios.post(`${process.env.REACT_APP_URL}/decklists/${decklistId}/card`, { cardName: cardName })
-            fetchData();
+            fetchData(decklistId);
         } catch (err) {
             console.error('Error adding card:', err);
         }
@@ -68,7 +68,7 @@ const ActiveDecklist = () => {
                 setSelected({})
             }
             await axios.patch(`${process.env.REACT_APP_URL}/decklists/${decklistId}/card`, { cardId: card.id, updateColumn: "is_removed", updateValue: true })
-            fetchData();
+            fetchData(decklistId);
         } catch (err) {
             console.error('Error removing card:', err);
         }
@@ -86,7 +86,7 @@ const ActiveDecklist = () => {
             if (quantity === '0') {
                 handleRemove(card, type, index)
             } else {
-                fetchData();
+                fetchData(decklistId);
             }
         } catch (err) {
             console.error('Error updating qty:', err);
