@@ -19,7 +19,12 @@ const ActiveDecklist = () => {
     const [selectedDetailsInput, setSelectedDetailsInput] = useState({})
 
     useEffect(() => {
-        fetchData(decklistId);
+        if (decklistId) {
+            fetchData(decklistId);
+        } else {
+            setCards([])
+            setDecklistName("new decklist")
+        }
     }, [decklistId])
 
     const fetchData = async (id) => {
