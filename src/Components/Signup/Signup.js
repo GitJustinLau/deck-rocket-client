@@ -11,7 +11,7 @@ function Signup ({handleLoggingIn}) {
         event.preventDefault();
 
         axios
-            .post("http://localhost:8080/users/register", {
+            .post(`${process.env.REACT_APP_URL}/users/register`, {
                 email: event.target.email.value,
                 password: event.target.password.value,
                 username: event.target.username.value,

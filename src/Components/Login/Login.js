@@ -10,7 +10,7 @@ function Login({ handleLogIn, handleSignUp }) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        axios.post("http://localhost:8080/users/login", {
+        axios.post(`${process.env.REACT_APP_URL}/users/login`, {
             email: event.target.email.value,
             password: event.target.password.value
         })
