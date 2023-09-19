@@ -20,16 +20,18 @@ const SearchBar = ({ addCard }) => {
         clearTimeout(delay);
 
         if (e.target.value) {
-            delay = setTimeout(async () => {
-                try {
-                    const search = await axios.get(`${process.env.REACT_APP_URL}/cardSearch?name=${e.target.value}`)
-                    const searchResults = search.data.slice(0, 8)
-                    setInputList(searchResults);
-                    setIsLoading(false);
-                } catch (error) {
-                    console.error('Error fetching search results:', error);
-                    setIsLoading(false);
-                }
+            delay = setTimeout(() => {
+                (async () => {
+                    try {
+                        const search = await axios.get(`${process.env.REACT_APP_URL}/cardSearch?name=${e.target.value}`)
+                        const searchResults = search.data.slice(0, 8)
+                        setInputList(searchResults);
+                        setIsLoading(false);
+                    } catch (error) {
+                        console.error('Error fetching search results:', error);
+                        setIsLoading(false);
+                    }
+                })()
             }, 2000);
         }
     };
