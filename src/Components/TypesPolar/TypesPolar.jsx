@@ -2,7 +2,7 @@ import { PolarArea } from 'react-chartjs-2';
 import { Chart, RadialLinearScale, ArcElement, Colors, Tooltip, Legend } from 'chart.js';
 Chart.register(RadialLinearScale, ArcElement, Colors, Tooltip, Legend);
 
-const TypesPolar = ({ TypedCards = { TypedCards } }) => {
+const TypesPolar = ({ TypedCards }) => {
 
     const data = {
         labels: Object.keys(TypedCards).map((type) => type),

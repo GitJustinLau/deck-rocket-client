@@ -8,12 +8,8 @@ const CardDetails = ({ card }) => {
             {Object.keys(card).length > 0 &&
                 <div className="details__wrapper">
                     <div className="details__mana-cost">
-                        {card.manaCostArr && card.manaCostArr.map((symbol, index) => {
-                            if (index % 2 !== 0) {
-                                return <img key={`${symbol}-${index}`}src={`${process.env.REACT_APP_URL}/images/${symbol}.png`} alt={`mana cost - ${symbol}`} className="details__symbol" />
-                            } else {
-                                return
-                            }
+                        {card.manaCostArr && card.manaCostArr.filter((symbol, index) => index % 2 !== 0).map((symbol, index) => {
+                            return <img key={`${symbol}-${index}`} src={`${process.env.REACT_APP_URL}/images/${symbol}.png`} alt={`mana cost - ${symbol}`} className="details__symbol" />
                         })}
                     </div>
                     {card.types && <p className='details__detail'>{card.types.join(' ')}</p>}
