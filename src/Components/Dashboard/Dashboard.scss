@@ -18,6 +18,7 @@
         columns: $primary-text;
         border: none;
     }
+
     &__form {
         display: flex;
         gap: 0.5rem;
@@ -31,6 +32,7 @@
     &__add {
         width: 1.5rem;
     }
+
     &__warning {
         display: flex;
         gap: 0.5rem;
@@ -54,10 +56,12 @@
         align-items: center;
         gap: 1rem;
         border: 2px solid $dark;
+        width: 100%;
     }
 
     &__name {
         padding: 0.5rem 2rem;
+        white-space: nowrap;
     }
 
     &__dropdown {
