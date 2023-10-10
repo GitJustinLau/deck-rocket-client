@@ -104,7 +104,7 @@ const ActiveDecklist = () => {
             <main className="active">
                 <section className="active__selected">
                     <div className="active__visual">
-                        <Tilt>
+                        <Tilt className="active_tilt">
                             <img src={selectedImg} alt="magic card" className="active__card-img" />
                         </Tilt>
                     </div>
