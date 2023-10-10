@@ -24,7 +24,7 @@ const SearchBar = ({ addCard }) => {
                 try {
                     const search = await axios.get(`${process.env.REACT_APP_URL}/cardSearch?name=${e.target.value}`)
                     const searchResults = search.data.slice(0, 8)
-                    console.log("search", search)
+                    // console.log("search", search)
                     setInputList(searchResults);
                     setIsLoading(false);
                 } catch (error) {

@@ -30,6 +30,7 @@ const ActiveDecklist = () => {
     const fetchData = async (id) => {
         try {
             const result = await axios.get(`${process.env.REACT_APP_URL}/decklists/${id}`)
+            console.log(result.data.cards)
             setCards(result.data.cards)
             setDecklistName(result.data.name)
         } catch (err) {
